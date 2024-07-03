@@ -4,7 +4,7 @@ import React from 'react'
 
 function NavBarItemHeader({textParagraph }:{textParagraph:string}) {
   return (
-    <p className='text-red-600 font-bold text-sm'>
+    <p className='text-red-600 font-bold text-sm mt-4'>
       {textParagraph}
     </p>
   )

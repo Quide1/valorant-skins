@@ -25,7 +25,7 @@ function NavBarAccordion({ accordionTitle, weapons }: NavBarAccordionProps) {
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger >{accordionTitle}</AccordionTrigger>
-          <AccordionContent className=' mb-2 flex flex-col gap-4 border-2 border-red-500' >
+          <AccordionContent className=' mb-2 flex flex-col gap-4 ' >
             {weapons.map(({displayName,uuid}, index) => {
               return (
               <Link className='flex flex-row gap-2 hover:translate-x-2 transition-all' key={uuid} href={`/weapons/${displayName}`}>
