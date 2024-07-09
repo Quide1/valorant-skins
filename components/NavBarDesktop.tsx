@@ -1,57 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { Button } from './ui/button'
+'use client'
+import React, { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 import Cross from "@/icons/Cross";
 import SheetMenu from "./NavBarContent";
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
 
 function NavBarDesktop() {
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [isLargeScreen, setIsLargeScreen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      const isLgScreen = window.innerWidth >= 1024;
+      setIsLargeScreen(isLgScreen);
+    };
 
-    useEffect(() => {
-        console.log(isOpen)
-    }, [isOpen])
-    useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Check size on initial load
+    }
 
-        const handleResize = () => {
-            const isLgScreen = window.innerWidth >= 992;
-            setIsLargeScreen(isLgScreen);
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
+  }, []);
 
-        };
-
-
-        if (typeof window !== "undefined") {
-            window.addEventListener("resize", handleResize);
-            handleResize();
-        }
-
-
-        return () => {
-            if (typeof window !== "undefined") {
-                window.removeEventListener("resize", handleResize);
-            }
-        };
-    }, []);
-
-
-    return (
+  return (
+    <>
+      {isLargeScreen && (
         <aside
-            className={`absolute bg-slate-800 h-screen w-9/12 top-0 left-0 max-w-[250px] flex flex-col transform transition-transform duration-300 ease-in-out p-6 border-r-2 border-white ${isOpen || isLargeScreen ? "translate-x-0" : "-translate-x-full"
-                }`}
-        >   
-        <ScrollArea className="h-full w-full  ">
-            <div className="flex flex-row justify-between text-lg  items-center h-10">
-                <h2 className='font-bold text-red-600'>Valorant Skins</h2>
-            </div>
+          className="bg-slate-800 h-screen w-[260px] transform transition-transform duration-300 ease-in-out p-6 border-r-2 border-2 border-red-500 sticky top-0 flex flex-col"
+        >
+          <ScrollArea className="h-full w-full">
+            <Link href="/" className="w-full">
+              <div className="flex flex-row justify-center text-lg gap-4 items-center h-10">
+                <h2 className="font-bold text-red-600">Vaskins</h2>
+                <picture className="max-w-8">
+                  <img src="/ValorantLogo.png" alt="valorant logo" />
+                </picture>
+              </div>
+            </Link>
             <section>
-                <ul className={`mt-2 mb-2 text-gray-400 flex  flex-col`} >
-                    <SheetMenu />
-                </ul>
+              <ul className="mt-2 mb-2 text-gray-400 flex flex-col">
+                <SheetMenu />
+              </ul>
             </section>
-            </ScrollArea>
+          </ScrollArea>
         </aside>
-    )
+      )}
+    </>
+  );
 }
 
-export default NavBarDesktop
+export default NavBarDesktop;

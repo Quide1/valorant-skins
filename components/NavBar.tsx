@@ -5,9 +5,8 @@ import NavBarDesktop from "./NavBarDesktop";
 function NewNavBar() {
 
     return (
-        <header className="w-full min-h-[5vh] bg-slate-800  flex flex-row justify-end items-center p-2">
+        <header className="w-full min-h-[5vh] bg-slate-800  flex flex-row justify-end items-center p-2 lg:hidden">
             <NavBarMobile/>
-            <NavBarDesktop/>
         </header>
     )
 }
